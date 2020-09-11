@@ -7,8 +7,10 @@ pipeline {
     stages{
         stage("Build Docker..!"){
             steps{
-                docker build -t ${REPO}:${TAG}
-                docker push ${REPO}:${TAG}
+                sh '''
+                    docker build -t ${REPO}:${TAG}
+                    docker push ${REPO}:${TAG}
+                '''
             }
         }
     }
