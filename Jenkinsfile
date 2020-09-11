@@ -5,9 +5,17 @@ pipeline {
         TAG = "jenkins-${env.BUILD_NUMBER}"
     }
     stages{
+        stage("Environment Check..!"){
+            steps{
+                bat '''
+                    echo '${NODE_NAME}'
+                    docker --version
+                '''
+            }
+        }
         stage("Build Docker..!"){
             steps{
-                sh '''
+                bat '''
                     docker build -t ${REPO}:${TAG}
                     docker push ${REPO}:${TAG}
                 '''
