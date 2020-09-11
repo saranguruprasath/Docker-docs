@@ -8,7 +8,7 @@ pipeline {
         stage("Environment Check..!"){
             steps{
                 bat '''
-                    echo '${NODE_NAME}'
+                    echo "${NODE_NAME}, ${REPO}, ${TAG}"
                     docker --version
                 '''
             }
@@ -16,7 +16,7 @@ pipeline {
         stage("Build Docker..!"){
             steps{
                 bat '''
-                    docker build -t ${REPO}:${TAG}
+                    docker build -t ${REPO}:${TAG} .
                     docker push ${REPO}:${TAG}
                 '''
             }
